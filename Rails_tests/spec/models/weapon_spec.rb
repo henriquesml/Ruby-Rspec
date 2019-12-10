@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Weapon, type: :model do
-  it "generate weapon level valid" do
+  it "Weapon level valid" do
 
     # Gerando Weapon valida
     name = %i[faca machado espada].sample
@@ -17,7 +17,7 @@ RSpec.describe Weapon, type: :model do
 
   end
 
-  it "generate weapon title valid" do
+  it "Weapon title valid" do
 
     # Gerando Weapon valida
     name = %i[faca machado espada].sample
@@ -31,6 +31,24 @@ RSpec.describe Weapon, type: :model do
     # Validando titulo
     expect(weapon.title).to eq("#{name} ##{level}")
 
+  end
+
+  it "Weapon with power_base invalid" do
+
+    weapon = build(:weapon, power_base: FFaker::Random.rand(101..9999))
+    expect(weapon).to_not be_valid
+  end
+
+  it "Weapon with power_step invalid" do
+
+    weapon = build(:weapon, power_step: FFaker::Random.rand(11..9999))
+    expect(weapon).to_not be_valid
+  end
+
+  it "Weapon with level invalid" do
+
+    weapon = build(:weapon, level: FFaker::Random.rand(11..9999))
+    expect(weapon).to_not be_valid
   end
 
 end
