@@ -1,0 +1,72 @@
+ALGUNS MATCHERS
+
+Matchers de equivalência e identidade
+
+    // eq: Passa se valor igual ao esperado
+    expect(atual).to eq(esperado)
+
+    // eql: Passa se x.eql?(y)
+    expect(x).to eql(y)
+
+    // be: Passa se x.equal?(y)
+    expect(x).to be(y)
+
+Matchers de comparação
+
+    // be >: Passa se valor atual for maior que x
+    expect(atual).to be > x
+
+    // be>=: Passa se valor atual for maior igual a x
+    expect(x).to be >= x
+
+    // be<=: Passa se valor atual for menor igual a x
+    expect(x).to be <= x
+
+    // be >: Passa se valor atual for menor que x
+    expect(atual).to be < x
+
+    // match: Passa se valor atual passar na expressão regular
+    expect(atual).to match(/RegExp/)
+
+Matchers de classe e tipo
+
+    // be_an_instance_of: Passa se o objeto atual é uma instancia da classe esperada
+    expect(atual).to be_an_instance_of(expected)
+
+    // be_a=: Passa se o tipo do objeto atual for o esperado
+    expect(x).to be_a(expected)
+
+Matchers TRUE/FALSE/NIL
+
+    // be_truthy: Passa enquanto não for false ou nil
+    expect(atual).to be_truthy
+
+    // be true: Passa se for true
+    expect(atual).to be true
+
+    // be_falsy: Passa enquanto for false ou nil
+    expect(atual).to be_falsy
+
+    // be false: Passa se for false
+    expect(atual).to be false
+
+    // be_nil: Passa se o valor for nil
+    expect(atual).to be_nil
+
+    // to_not be_nil: Passa se o valor não for nil
+    expect(atual).to_not be_nil
+
+Matchers ERRO
+
+    // Passa se a chamada levantar um erro
+    expect{ ... }.to raise_error
+
+    // Passa se a chamada levantar um erro do tipo ErrorClass
+    expect{ ... }.to raise_error(ErrorClass)
+
+    // Passa se a chamada levantar um erro com a menssagem "Deu erro"
+    expect{ ... }.to raise_error("Deu erro")
+    
+    // Passa se a chamada levantar um erro do tipo ErrorClass com a menssagem "Deu erro"
+    expect{ ... }.to raise_error(ErrorClass, "Deu erro")
+
