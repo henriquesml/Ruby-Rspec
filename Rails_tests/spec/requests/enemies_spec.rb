@@ -1,6 +1,43 @@
 require 'rails_helper'
 
 RSpec.describe "Enemies", type: :request do
+
+  describe "GET /enemies" do
+    context "When the enemy exists" do
+      let(:enemy) { create(:enemy) }
+      let(:enemy_attributes) { attributes_for(:enemy) }
+
+      before(:each) { post "/enemies", params: enemy_attributes }
+
+      it 'Return status code 200 Index' do
+       
+        get "/enemies"
+
+        expect(response).to have_http_status(200)
+      end
+
+      it 'Return enemies Index' do
+
+        get "/enemies"
+
+        expect(response.body).to include(enemy_attributes[:name], enemy_attributes[:power_base].to_s, enemy_attributes[:power_step].to_s, enemy_attributes[:level].to_s, enemy_attributes[:kind])
+      end
+    end
+
+    context "When the enemy does not exists" do
+      before(:each) { get '/enemies', params: attributes_for(:enemy) } 
+
+      it 'Returns status code 200' do
+    
+        expect(response).to have_http_status(200)
+      end
+      it 'Returns a not found message' do
+
+        expect(response.body).to match(/No enemies found/)
+      end
+    end
+  end
+
   describe "PUT /enemies" do
     context "When the enemy exists" do
 
