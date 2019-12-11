@@ -1,0 +1,6 @@
+<% @weapons.each do |weapons| %>
+    
+    <h1><%=  link_to weapons.title, weapons_path(weapons)%></h1>
+    <p><%= weapons.current_power %></p>
+
+<% end %>

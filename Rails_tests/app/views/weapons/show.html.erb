@@ -1,0 +1,8 @@
+<p><%= @weapon.title %></p>
+<p><%= @weapon.description %></p>
+<p><%= @weapon.current_power %></p>
+<p><%= @weapon.power_step %></p>
+<p><%= @weapon.power_base %></p>
+
+<h1><%=  link_to 'Voltar', weapons_path%></h1>
+<%= link_to 'Deletar Arma', weapons_path(@weapon), method: :delete, data:{ confirm: 'Deseja deletar essa arma?' }%>
