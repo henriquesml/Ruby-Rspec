@@ -61,8 +61,8 @@ RSpec.describe "Weapons", type: :request do
             weapon = create(:weapon)
     
             delete "/weapons/#{weapon.id}"
+            expect(response).to have_http_status(204)
             expect{Weapon.find(weapon.id)}.to raise_error("Couldn't find Weapon with 'id'=#{weapon.id}")
-           
         end
        
     end
