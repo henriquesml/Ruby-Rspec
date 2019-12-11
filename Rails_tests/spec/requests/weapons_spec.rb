@@ -56,6 +56,13 @@ RSpec.describe "Weapons", type: :request do
     end
 
     describe "DELETE /weapons" do
+
+        it 'Return status code 204' do
+            weapon = create(:weapon)
+            delete "/weapons/#{weapon.id}"
+  
+            expect(response).to have_http_status(204)
+        end
    
         it "Delete weapon" do
             weapon = create(:weapon)
