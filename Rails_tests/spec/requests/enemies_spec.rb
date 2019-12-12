@@ -2,7 +2,21 @@ require 'rails_helper'
 
 RSpec.describe "Enemies", type: :request do
 
-  describe "GET /enemies" do
+  describe "GET /enemies Create" do
+    context "When the enemy exists" do
+      let(:enemy) { create(:enemy) }
+      let(:enemy_attributes) { attributes_for(:enemy) }
+
+      before(:each) { post "/enemies", params: enemy_attributes }
+
+      it 'Return status code 200 Index' do
+       
+        expect(response).to have_http_status(201)
+      end
+    end
+  end
+
+  describe "GET /enemies Index" do
     context "When the enemy exists" do
       let(:enemy) { create(:enemy) }
       let(:enemy_attributes) { attributes_for(:enemy) }
@@ -22,9 +36,16 @@ RSpec.describe "Enemies", type: :request do
 
         expect(response.body).to include(enemy_attributes[:name], enemy_attributes[:power_base].to_s, enemy_attributes[:power_step].to_s, enemy_attributes[:level].to_s, enemy_attributes[:kind])
       end
+
+      it 'Return enemies Show' do
+
+        get "/enemies#{enemy_attributes[:id]}"
+        
+        expect(response.body).to include(enemy_attributes[:name], enemy_attributes[:power_base].to_s, enemy_attributes[:power_step].to_s, enemy_attributes[:level].to_s, enemy_attributes[:kind])
+      end
     end
 
-    context "When the enemy does not exists" do
+    context "When the enemy does not exists Index" do
       before(:each) { get '/enemies', params: attributes_for(:enemy) } 
 
       it 'Returns status code 200' do
@@ -34,6 +55,13 @@ RSpec.describe "Enemies", type: :request do
       it 'Returns a not found message' do
 
         expect(response.body).to match(/No enemies found/)
+      end
+
+      it 'Return enemies Show' do
+
+        get "/enemies/0"
+        
+        expect(response.body).to match(/Couldn't find Enemy with 'id'=0/)
       end
     end
   end
